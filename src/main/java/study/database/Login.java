@@ -43,7 +43,7 @@ public class Login extends HttpServlet {
 			// 3.한번 접속할때마다 접속포인트 1씩을 증가시켜준다.
 			// 4.접속 포인트 수 1 증가.
 			// 5.최종방문일자 업데이트
-			// 6. 정상로그인 되면 회원메인페이지로 보낸다.
+			// 6.정상로그인 되면 회원메인페이지로 보낸다.
 			
 			HttpSession session = request.getSession();
 			session.setAttribute("sMid", mid);

@@ -9,6 +9,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 @WebServlet("*.gu")
 public class GuestController extends HttpServlet{
@@ -20,6 +21,14 @@ public class GuestController extends HttpServlet{
 		String uri = request.getRequestURI();
 		String com = uri.substring(uri.lastIndexOf("/")+1,uri.lastIndexOf("."));
 		
+		// 세션이 끊어지면 작업의 진행을 로그인창으로 보낸다.
+		HttpSession session = request.getSession();
+		int level = session.getAttribute("sLevel")==null ? 99 : (int) session.getAttribute("sLevel");
+		
+		if(level > 4) {	// 세션이 끊어지면 작업의 진행을 홈창으로 보낸다.
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/");
+			dispatcher.forward(request, response);
+		}
 		if(com.equals("guestList")) {
 			command = new GuestListCommand();
 			command.execute(request, response);

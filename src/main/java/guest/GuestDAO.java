@@ -121,7 +121,8 @@ public class GuestDAO {
 	public int totRecCnt() {
 		int totRecCnt = 0;
 		try {
-			sql = "select count(*) from guest";
+//			sql = "select count(*) from guest";
+			sql = "select count(*) as cnt from guest";
 			pstmt = conn.prepareStatement(sql);
 			rs = pstmt.executeQuery();
 			
